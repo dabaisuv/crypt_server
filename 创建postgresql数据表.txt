@@ -1,0 +1,34 @@
+-- Database: crypt
+
+-- DROP DATABASE IF EXISTS crypt;
+
+CREATE DATABASE crypt
+    WITH
+    OWNER = crypt
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Chinese (Simplified)_China.936'
+    LC_CTYPE = 'Chinese (Simplified)_China.936'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+
+
+-- Table: public.users
+
+-- DROP TABLE IF EXISTS public.users;
+
+CREATE TABLE IF NOT EXISTS public.users
+(
+    id integer NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    username character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    salt_and_hashed_password character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    email_address character varying(250) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT users_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.users
+    OWNER to crypt;
